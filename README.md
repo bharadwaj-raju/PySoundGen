@@ -2,7 +2,7 @@
 
 Python script to generate sounds and music from sound waves.
 
-![plot.png]
+![plot](plot.png)
 
 [Sample music produced by PySoundGen](#sample-music)
 
