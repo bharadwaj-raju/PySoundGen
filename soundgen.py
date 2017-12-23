@@ -38,6 +38,8 @@ with wave.open('Sound_%s.wav' % uid, 'w') as f:
 	f.setparams((n_channels, data_size, sample_rate, n_samples, "NONE", "Uncompressed"))
 	f.writeframes(data.tostring())
 
+print('Sound_%s.wav' % uid)
+
 if '--play' in sys.argv:
 	sp.Popen(['aplay', 'Sound_%s.wav' % uid]).wait()
 
