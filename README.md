@@ -36,6 +36,10 @@ will produce audio with 4 seconds of 44 Hz waves at 100% amplitude, then 6s of 4
 
 **NOTE:** The maximum amplitude of a sound card is `32767`. The `amplitude%` value taken is a percentage of this.
 
+**NOTE:** Values `duration` and `frequency` can be decimals.
+
+**NOTE:** Comments can be used in `tones_file` with `#`.
+
 For example,
 
     $ ./soundgen.py tones.txt output.wav --play
@@ -46,29 +50,31 @@ Omit `--play` to only generate audio and not play it.
 
 ## Sample Music
 
-The following generates the Sa-Re-Ga-Ma-Pa-Dha-Ni-Sa-Sa-Ni-Dha-Pa-Ma-Ga-Re-Sa tone from Indian Classical Music:
+The following generates the Sa-Re-Ga-Ma-Pa-Dha-Ni-Sa2-Sa2-Ni-Dha-Pa-Ma-Ga-Re-Sa tone from Indian Classical Music:
 
     $ cat saregama.txt
-	2 240 100
-	2 270 100
-	2 300 100
-	2 320 100
-	2 360 100
-	2 400 100
-	2 450 100
-	2 480 100
-	1 480 0
-	2 480 100
-	2 450 100
-	2 400 100
-	2 360 100
-	2 320 100
-	2 300 100
-	2 270 100
-	2 240 100
+	2 240 100  # Sa
+	2 270 100  # Re
+	2 300 100  # Ga
+	2 320 100  # Ma
+	2 360 100  # Pa
+	2 400 100  # Dha
+	2 450 100  # Ni
+	2 480 100  # Sa2
+	0.5 480 0  # Silence
+	2 480 100  # Sa2
+	2 450 100  # Ni
+	2 400 100  # Dha
+	2 360 100  # Pa
+	2 320 100  # Ma
+	2 300 100  # Ga
+	2 270 100  # Re
+	2 240 100  # Sa
 
     $ ./soundgen.py saregama.txt saregama.wav
 
 Wav file: [`sample/saregama.wav`](./sample/saregama.wav?raw=true)
+
+Tones file: [`sample/saregama.txt`](./sample/saregama.txt)
 
 

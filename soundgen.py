@@ -21,7 +21,8 @@ with open(tones_file) as f:
 		if not line.startswith('#') and line:
 			line = line.strip()
 			line = line.split()[:3]
-			tones.append(Tone(*[int(x) for x in line]))
+			#duration =
+			tones.append(Tone(*[float(x) for x in line]))
 
 data = array.array('h') # signed short integer (-32768 to 32767) data
 						# -32768 to 32767 is the max amplitude of a sound card
@@ -32,7 +33,7 @@ data_size = 2  # 2 bytes because of using signed short integers => bit depth = 1
 
 for tone in tones:
 	n_samples_per_cycle = int(sample_rate / tone.freq)
-	n_samples = sample_rate * tone.duration
+	n_samples = int(sample_rate * tone.duration)
 	for i in range(n_samples):
 		sample = 32767 * float(tone.amplitude) / 100
 		sample *= math.sin(math.pi * 2 * (i % n_samples_per_cycle) / n_samples_per_cycle)
