@@ -4,10 +4,9 @@ Python script to generate sounds and music from sound waves.
 
 ![plot](plot.png)
 
+[Sample music produced by PySoundGen](#sample-music)
 
 Waveform formula from http://code.activestate.com/recipes/578168-sound-generator-using-wav-file/
-
-[Sample music produced by PySoundGen](#sample-music)
 
 License: MIT
 
