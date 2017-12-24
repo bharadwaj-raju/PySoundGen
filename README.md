@@ -19,7 +19,8 @@ License: MIT
 
 ## Usage
 
-PySoundGen takes a file (`tones_file`) describing the sound wave, and a filename for the output audio file (`output_wav_file`).
+PySoundGen takes a file (`tones_file`) describing the sound wave, and a filename for the output audio file (`output_wav_file`). Optionally plays
+the output audio (`--play` option).
 
     $ ./soundgen.py {tones_file} {output_wav_file} [--play]
 
@@ -31,21 +32,23 @@ For example, a file, say `tones.txt`, with:
 	6 440 100
 	2 440 50
 
-will produce audio with 4 seconds of 44 Hz waves at 100% amplitude, then 6s of 440 Hz at 100%, then 2s of 440 Hz at 50%.
+describes a sound wave of 4 seconds of 44 Hz waves at 100% amplitude, then 6s of 440 Hz at 100%, then 2s of 440 Hz at 50%.
+
+To generate sound from the above `tones.txt` file,
+
+    $ ./soundgen.py tones.txt output.wav --play
+
+will generate a wav file `output.wav` with audio as described above, and will play `output.wav`.
+
+Wav file produced by above command: [`samples/example.wav`](samples/example.wav?raw=true)
+
+
 
 **NOTE:** The maximum amplitude of a sound card is `32767`. The `amplitude%` value taken is a percentage of this.
 
 **NOTE:** Values `duration` and `frequency` can be decimals.
 
 **NOTE:** Comments can be used in `tones_file` with `#`.
-
-For example,
-
-    $ ./soundgen.py tones.txt output.wav --play
-
-will generate a wav file `output.wav` with audio as described in the `tones.txt` file (see above), and will play the `output.wav`.
-
-Omit `--play` to only generate audio and not play it.
 
 ## Sample Music
 
