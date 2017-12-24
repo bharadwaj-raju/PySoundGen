@@ -1,21 +1,27 @@
+#!/usr/bin/env python3
+
 import math
 import sys
 import wave
 import array
 import subprocess as sp
 from collections import namedtuple
-import base64
-import hashlib
 
-# Usage: soundgen.py seconds,freq,amplitude [...] [--play]
+# Usage: soundgen.py tones_file wav_output_file [--play]
 
 Tone = namedtuple('Tone', 'duration freq amplitude')
 
-tones_raw = [x for x in sys.argv[1:] if x != '--play']
+tones_file = sys.argv[1]
+wav_output_file = sys.argv[2]
+
 tones = []
 
-for tone_raw in tones_raw:
-	tones.append(Tone(*[int(x) for x in tone_raw.split(',')]))
+with open(tones_file) as f:
+	for line in f:
+		if not line.startswith('#') and line:
+			line = line.strip()
+			line = line.split()[:3]
+			tones.append(Tone(*[int(x) for x in line]))
 
 data = array.array('h') # signed short integer (-32768 to 32767) data
 						# -32768 to 32767 is the max amplitude of a sound card
@@ -32,14 +38,10 @@ for tone in tones:
 		sample *= math.sin(math.pi * 2 * (i % n_samples_per_cycle) / n_samples_per_cycle)
 		data.append(int(sample))
 
-uid = hashlib.md5(base64.b64encode(data.tostring())).hexdigest()
-
-with wave.open('Sound_%s.wav' % uid, 'w') as f:
+with wave.open(wav_output_file, 'w') as f:
 	f.setparams((n_channels, data_size, sample_rate, n_samples, "NONE", "Uncompressed"))
 	f.writeframes(data.tostring())
 
-print('Sound_%s.wav' % uid)
-
 if '--play' in sys.argv:
-	sp.Popen(['aplay', 'Sound_%s.wav' % uid]).wait()
+	sp.Popen(['aplay', wav_output_file]).wait()
 

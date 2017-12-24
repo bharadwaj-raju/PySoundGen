@@ -20,28 +20,55 @@ License: MIT
 
 ## Usage
 
-Latest iteration.
+PySoundGen takes a file (`tones_file`) describing the sound wave, and a filename for the output audio file (`output_wav_file`).
 
-Allows you to specify a series of tones, each tone being an ordered triplet `(duration, frequency, amplitude%)`.
+    $ ./soundgen.py {tones_file} {output_wav_file} [--play]
 
-    $ python3 soundgen.py {duration},{freq},{amplitude%} [...] [--play]
+`tones_file` is a newline-separated file of space-separated triplets of `(duration, frequency, amplitude%)`. This describes the sound wave.
+
+For example, a file, say `tones.txt`, with:
+
+    4 44 100
+	6 440 100
+	2 440 50
+
+will produce audio with 4 seconds of 44 Hz waves at 100% amplitude, then 6s of 440 Hz at 100%, then 2s of 440 Hz at 50%.
+
+**NOTE:** The maximum amplitude of a sound card is `32767`. The `amplitude%` value taken is a percentage of this.
 
 For example,
 
-    $ python3 soundgen.py 4,44,100 6,440,100 2,440,50 --play
+    $ ./soundgen.py tones.txt output.wav --play
 
-generates a wav audio with 4 seconds of 44 Hz waves at 100% amplitude, then 6s of 440 Hz at 100%, then 2s of 440 Hz at 50%,
-and plays the resulting wav (`--play`). Omit `--play` to only generate audio and not play it.
+will generate a wav file `output.wav` with audio as described in the `tones.txt` file (see above), and will play the `output.wav`.
 
-**NOTE:** The format of a tone must be *exactly* `{duration},{freq},{amplitude%}`. No extra spaces, no order changes, etc.
-
+Omit `--play` to only generate audio and not play it.
 
 ## Sample Music
 
-The following generates the Sa-Re-Ga-Ma-Pa-Dha-Ni tone from Indian Classical Music:
+The following generates the Sa-Re-Ga-Ma-Pa-Dha-Ni-Sa-Sa-Ni-Dha-Pa-Ma-Ga-Re-Sa tone from Indian Classical Music:
 
-    $ python3 soundgen.py 2,240,100 2,270,100 2,300,100 2,320,100 2,360,100 2,400,100 2,450,100
+    $ cat saregama.txt
+	2 240 100
+	2 270 100
+	2 300 100
+	2 320 100
+	2 360 100
+	2 400 100
+	2 450 100
+	2 480 100
+	1 480 0
+	2 480 100
+	2 450 100
+	2 400 100
+	2 360 100
+	2 320 100
+	2 300 100
+	2 270 100
+	2 240 100
 
-Wav file: [`Sound_369dfa0e70a58dc0c71433488de8270f.wav`](./Sound_369dfa0e70a58dc0c71433488de8270f.wav)
+    $ ./soundgen.py saregama.txt saregama.wav
+
+Wav file: [`sample/saregama.wav`](./sample/saregama.wav?raw=true)
 
 
