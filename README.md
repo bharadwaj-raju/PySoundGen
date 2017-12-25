@@ -6,7 +6,9 @@ Python script to generate sounds and music from sound waves.
 
 [Sample music produced by PySoundGen](#sample-music)
 
-Waveform formula from http://code.activestate.com/recipes/578168-sound-generator-using-wav-file/
+Waveform formula from ["wavfile: A Simple Sound Library", written for CSE 20211 course, by Douglas Thain](https://www3.nd.edu/~dthain/courses/cse20211/fall2013/wavfile/).
+
+    amplitude_at_sample_N = tone_amplitude_max * sin(2 * PI * frequency * (N/sample_rate))
 
 License: MIT
 
@@ -40,7 +42,7 @@ To generate sound from the above `tones.txt` file,
 
 will generate a wav file `output.wav` with audio as described above, and will play `output.wav`.
 
-Wav file produced by above command: [`samples/example.wav`](samples/example.wav?raw=true)
+Wav file produced by above command: [`sample/example.wav`](samples/example.wav?raw=true)
 
 
 
